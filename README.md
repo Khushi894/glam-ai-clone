@@ -24,23 +24,22 @@ AI-powered background remover web app built using Flask, HTML, CSS, and JavaScri
 pip install -r requirements.txt
 python app.py
 ```
-
 ## Preview
 
 ### Home Page
-![Home](screenshots/Screenshot%202026-05-09%20Home.png)
+![Home](screenshots/home.png)
 
 ### Dark Mode
-![Dark Mode](screenshots/Screenshot%202026-05-09%20Dark_mode.png)
+![Dark](screenshots/dark.png)
 
 ### Upload Feature
-![Upload](screenshots/Screenshot%202026-05-09%20upload.png)
+![Upload](screenshots/upload.png)
 
 ### Cartoon Filter
-![Cartoon](screenshots/Screenshot%202026-05-09%20cartoon.png)
+![Cartoon](screenshots/cartoon.png)
 
 ### Beauty Filter
-![Beauty](screenshots/Screenshot%202026-05-09%20beauty.png)
+![Beauty](screenshots/beauty.png)
 
 ### Mobile Responsive View
-![Mobile](screenshots/Screenshot%202026-05-09%20mobile_view.png)
+![Mobile](screenshots/mobile.png)
