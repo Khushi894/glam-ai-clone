@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Glam AI Clone</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Glam AI Clone</h1>
+        <button id="themeBtn"
+onclick="toggleTheme()">
+
+🌙 Dark Mode
+
+</button>
+
+      <div id="dropArea">
+
+    <p>Drag & Drop Image Here</p>
+
+    <input type="file" id="imageInput">
+
+</div>
+
+        <div class="upload-btn">
+            <button onclick="uploadImage()">
+               Upload Image
+            </button>
+</div>
+        <div id="loader" class="loader"></div>
+
+
+
+        <div class="image-box">
+
+    <div>
+        <h3>Original</h3>
+        <img id="originalPreview">
+    </div>
+
+    <div>
+        <h3>AI Result</h3>
+        <img id="preview">
+    </div>
+
+</div>
+
+        <p id="status"></p>
+        <div id="loader"></div>
+        <br>
+
+<div class="bg-buttons">
+<button onclick="cartoonEffect()">
+Cartoon
+</button>
+<button onclick="beautyFilter()">
+Beauty
+</button>
+
+<button onclick="changeBg('white')">
+White
+</button>
+
+<button onclick="changeBg('blue')">
+Blue
+</button>
+
+<button onclick="changeBg('pink')">
+Pink
+</button>
+
+<button onclick="changeBg('black')">
+Black
+</button>
+
+</div>
+        <a id="downloadBtn" download="output.png">
+
+    <button>
+        Download Image
+    </button>
+
+</a>
+
+    </div>
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+
+</body>
+</html>
