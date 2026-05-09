@@ -23,6 +23,7 @@ AI-powered background remover web app built using Flask, HTML, CSS, and JavaScri
 ```bash
 pip install -r requirements.txt
 python app.py
+```
 
 ## Preview
 
