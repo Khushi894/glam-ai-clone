@@ -11,92 +11,89 @@
     >
 
 </head>
-
 <body>
 
-    <div class="container">
+<div class="app">
 
-        <h1>Glam AI Clone</h1>
-        <button id="themeBtn"
-onclick="toggleTheme()">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-🌙 Dark Mode
+        <h1>Glam AI</h1>
+        <p>Premium AI Studio</p>
 
-</button>
+        <button id="themeToggle">
+            Toggle Theme
+        </button>
 
-      <div id="dropArea">
+        <div class="tool-section">
 
-    <p>Drag & Drop Image Here</p>
-
-    <input type="file" id="imageInput">
-
-</div>
-
-        <div class="upload-btn">
-            <button onclick="uploadImage()">
-               Upload Image
+            <button onclick="removeBackground()">
+                Remove Background
             </button>
-</div>
-        <div id="loader" class="loader"></div>
 
+            <button onclick="applyBeautyFilter()">
+                Beauty Filter
+            </button>
 
+            <button onclick="applyCartoonFilter()">
+                Cartoon Filter
+            </button>
 
+            <button id="downloadBtn">
+                Download
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-content">
+
+        <!-- UPLOAD -->
+        <div id="dropArea">
+
+            <h2>Upload Your Image</h2>
+
+            <p>Drag & drop or choose file</p>
+
+            <label for="imageInput" class="custom-upload">
+                Choose Image
+            </label>
+
+            <input type="file" id="imageInput" hidden>
+
+        </div>
+
+        <!-- IMAGE SECTION -->
         <div class="image-box">
 
-    <div>
-        <h3>Original</h3>
-        <img id="originalPreview">
-    </div>
+            <div class="image-card">
 
-    <div>
-        <h3>AI Result</h3>
-        <img id="preview">
-    </div>
+                <h3>Original</h3>
 
-</div>
+                <img id="preview">
 
+            </div>
+
+            <div class="image-card">
+
+                <h3>AI Result</h3>
+
+                <img id="resultImage">
+
+            </div>
+
+        </div>
+
+        <!-- STATUS -->
         <p id="status"></p>
-        <div id="loader"></div>
-        <br>
-
-<div class="bg-buttons">
-<button onclick="cartoonEffect()">
-Cartoon
-</button>
-<button onclick="beautyFilter()">
-Beauty
-</button>
-
-<button onclick="changeBg('white')">
-White
-</button>
-
-<button onclick="changeBg('blue')">
-Blue
-</button>
-
-<button onclick="changeBg('pink')">
-Pink
-</button>
-
-<button onclick="changeBg('black')">
-Black
-</button>
-
-</div>
-        <a id="downloadBtn" download="output.png">
-
-    <button>
-        Download Image
-    </button>
-
-</a>
 
     </div>
 
-    <script
-        src="{{ url_for('static', filename='script.js') }}"
-    ></script>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>

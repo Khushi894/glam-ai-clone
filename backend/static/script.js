@@ -1,193 +1,157 @@
-const dropArea =
-    document.getElementById("dropArea");
+const imageInput = document.getElementById("imageInput");
 
-dropArea.addEventListener(
-    "dragover",
-    (e) => {
+const preview = document.getElementById("preview");
 
-        e.preventDefault();
+const resultImage = document.getElementById("resultImage");
 
-        dropArea.classList.add("hover");
+const statusText = document.getElementById("status");
+
+let selectedFile = null;
+
+/* IMAGE PREVIEW */
+
+imageInput.addEventListener("change", function () {
+
+    selectedFile = imageInput.files[0];
+
+    if(selectedFile){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            preview.src = e.target.result;
+        }
+
+        reader.readAsDataURL(selectedFile);
     }
-);
+});
 
-dropArea.addEventListener(
-    "dragleave",
-    () => {
+/* REMOVE BACKGROUND */
 
-        dropArea.classList.remove(
-            "hover"
-        );
-    }
-);
+async function removeBackground(){
 
-dropArea.addEventListener(
-    "drop",
-    (e) => {
+    if(!selectedFile){
 
-        e.preventDefault();
-
-        dropArea.classList.remove(
-            "hover"
-        );
-
-        const files = e.dataTransfer.files;
-
-        document.getElementById(
-            "imageInput"
-        ).files = files;
-    }
-);
-async function uploadImage() {
-    try{
-
-    const input =
-        document.getElementById("imageInput");
-
-    const file = input.files[0];
-
-    if (!file) {
-        alert("Select image");
+        alert("Please upload image first");
         return;
     }
 
-    // Original preview
-    const originalPreview =
-        document.getElementById(
-            "originalPreview"
-        );
-
-    originalPreview.src =
-        URL.createObjectURL(file);
-        originalPreview.style.display = "block";
-
-    // AI result preview
-    const preview =
-        document.getElementById("preview");
+    statusText.innerText = "Removing background...";
 
     const formData = new FormData();
 
-    formData.append("image", file);
+    formData.append("image", selectedFile);
 
-    document.getElementById("status")
-        .innerText =
-        "Processing AI...";
-    document.getElementById("loader")
-    .style.display = "block";
+    const response = await fetch("/upload", {
 
-    document.getElementById("loader")
-.style.display = "block";
-    const response = await fetch(
-        "/upload",
-        {
-            method: "POST",
-            body: formData
-        }
+        method:"POST",
+        body:formData
+    });
+
+    const data = await response.blob();
+
+    const imageURL = URL.createObjectURL(data);
+
+    resultImage.src = imageURL;
+
+    statusText.innerText = "Background Removed Successfully";
+}
+
+/* BEAUTY FILTER */
+
+function applyBeautyFilter(){
+
+    if(!preview.src){
+
+        alert("Upload image first");
+        return;
+    }
+
+    resultImage.src = preview.src;
+
+    resultImage.style.filter =
+    "brightness(1.1) contrast(1.1) saturate(1.2)";
+
+    statusText.innerText = "Beauty Filter Applied";
+}
+
+/* CARTOON FILTER */
+
+function applyCartoonFilter(){
+
+    if(!preview.src){
+
+        alert("Upload image first");
+        return;
+    }
+
+    resultImage.src = preview.src;
+
+    resultImage.style.filter =
+    "contrast(1.4) saturate(1.5)";
+
+    statusText.innerText = "Cartoon Filter Applied";
+}
+
+/* DOWNLOAD */
+
+document.getElementById("downloadBtn")
+.addEventListener("click", function(){
+
+    if(!resultImage.src){
+
+        alert("No image to download");
+        return;
+    }
+
+    const a = document.createElement("a");
+
+    a.href = resultImage.src;
+
+    a.download = "glam-ai-result.png";
+
+    a.click();
+});
+const themeToggle = document.getElementById("themeToggle");
+
+let darkMode = true;
+
+themeToggle.addEventListener("click", () => {
+
+    const cards = document.querySelectorAll(
+        ".image-card, #dropArea, .tool-section button"
     );
 
-    const blob =
-        await response.blob();
+    if(darkMode){
 
-    const imageURL =
-        URL.createObjectURL(blob);
+        document.body.style.background = "#f3f3f3";
+        document.body.style.color = "#111";
 
-    preview.src = imageURL;
-    preview.style.display = "block";
+        document.querySelector(".sidebar").style.background = "#ffffff";
 
-    document.getElementById("status")
-        .innerText =
-        "Background Removed Successfully";
-    document.getElementById("loader")
-    .style.display = "none";
+        cards.forEach(card => {
 
-    // Download button
-    const downloadBtn =
-        document.getElementById(
-            "downloadBtn"
-        );
+            card.style.background = "#ffffff";
+            card.style.color = "#111";
+            card.style.border = "1px solid #ddd";
+        });
 
-    downloadBtn.href = imageURL;
+    }else{
 
-    downloadBtn.style.display =
-        "inline-block";
-}
+        document.body.style.background = "#0b0b0f";
+        document.body.style.color = "white";
 
-catch (error) {
+        document.querySelector(".sidebar").style.background = "#111114";
 
-    console.log(error);
+        cards.forEach(card => {
 
-    document.getElementById("loader")
-    .style.display = "none";
-
-    document.getElementById("status")
-    .innerText =
-    "Something went wrong";
-}
-}
-function changeBg(color) {
-
-    const resultImage =
-    document.getElementById("preview");
-
-    if(color === "white") {
-
-        resultImage.style.background =
-        "white";
+            card.style.background = "#111114";
+            card.style.color = "white";
+            card.style.border =
+            "1px solid rgba(255,255,255,0.06)";
+        });
     }
 
-    if(color === "blue") {
-
-        resultImage.style.background =
-        "lightblue";
-    }
-
-    if(color === "pink") {
-
-        resultImage.style.background =
-        "pink";
-    }
-
-    if(color === "black") {
-
-        resultImage.style.background =
-        "black";
-    }
-}
-function toggleTheme() {
-
-    document.documentElement.classList
-    .toggle("dark-mode");
-}
-function cartoonEffect() {
-
-    const image =
-    document.getElementById("preview");
-
-    image.style.filter =
-    "contrast(120%) saturate(150%) brightness(105%)";
-
-    image.style.border =
-    "5px solid cyan";
-
-    image.style.boxShadow =
-    "0px 0px 25px cyan";
-}
-function beautyFilter() {
-
-    const image =
-    document.getElementById("preview");
-
-    image.style.filter =
-    `
-    brightness(108%)
-    contrast(105%)
-    saturate(115%)
-    blur(0.4px)
-    `;
-
-    image.style.boxShadow =
-    "0px 0px 25px hotpink";
-
-    image.style.border =
-    "5px solid hotpink";
-}
+    darkMode = !darkMode;
+});
