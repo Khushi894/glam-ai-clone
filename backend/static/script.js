@@ -78,22 +78,35 @@ function applyBeautyFilter(){
 
 /* CARTOON FILTER */
 
-function applyCartoonFilter(){
+async function applyCartoonFilter(){
 
-    if(!preview.src){
+    if(!selectedFile){
 
         alert("Upload image first");
         return;
     }
 
-    resultImage.src = preview.src;
+    statusText.innerText = "Applying Real Cartoon Filter...";
 
-    resultImage.style.filter =
-    "contrast(1.4) saturate(1.5)";
+    const formData = new FormData();
 
-    statusText.innerText = "Cartoon Filter Applied";
+    formData.append("image", selectedFile);
+
+    const response = await fetch("/cartoon", {
+
+        method:"POST",
+        body:formData
+    });
+
+    const data = await response.blob();
+
+    const imageURL = URL.createObjectURL(data);
+
+    resultImage.src = imageURL;
+
+    statusText.innerText =
+    "Real Cartoon Filter Applied";
 }
-
 /* DOWNLOAD */
 
 document.getElementById("downloadBtn")
@@ -155,3 +168,47 @@ themeToggle.addEventListener("click", () => {
 
     darkMode = !darkMode;
 });
+function applySketchFilter(){
+
+    if(!preview.src){
+
+        alert("Upload image first");
+        return;
+    }
+
+    resultImage.src = preview.src;
+
+    resultImage.style.filter =
+    "grayscale(1) contrast(2) brightness(1.2)";
+
+    statusText.innerText = "Sketch Filter Applied";
+}
+function applyAnimeFilter(){
+
+    resultImage.src = preview.src;
+
+    resultImage.style.filter =
+    "contrast(1.7) saturate(2.2) brightness(1.15) hue-rotate(-10deg)";
+
+    statusText.innerText = "Anime Filter Applied";
+}
+
+function applyPopArtFilter(){
+
+    resultImage.src = preview.src;
+
+    resultImage.style.filter =
+    "contrast(2.5) saturate(3) brightness(1.2) hue-rotate(20deg)";
+
+    statusText.innerText = "Pop Art Filter Applied";
+}
+
+function applyOilPaintFilter(){
+
+    resultImage.src = preview.src;
+
+    resultImage.style.filter =
+    "blur(0.5px) saturate(1.6) contrast(1.2)";
+
+    statusText.innerText = "Oil Painting Effect Applied";
+}
