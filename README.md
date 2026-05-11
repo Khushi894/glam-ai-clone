@@ -41,9 +41,6 @@ python app.py
 ### New Home UI
 ![New Home](screenshots/newhome.png)
 
-### Dark Mode
-![Dark](screenshots/dark.png)
-
 ### Light Mode
 ![Light](screenshots/lightmode.png)
 
@@ -55,3 +52,6 @@ python app.py
 
 ### Redesigned Layout
 ![Redesign](screenshots/redesign.png)
+
+### New Mobile Preview
+![New Mobile](screenshots/newmobile.png)
