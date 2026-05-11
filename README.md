@@ -26,20 +26,32 @@ python app.py
 ```
 ## Preview
 
-### Home Page
-![Home](screenshots/home.png)
+## Old Design
+
+### Old UI
+![Old UI](screenshots/home.png)
+
+### Mobile View
+![Mobile](screenshots/mobile.png)
+
+---
+
+## Redesigned Premium UI
+
+### New Home UI
+![New Home](screenshots/newhome.png)
 
 ### Dark Mode
 ![Dark](screenshots/dark.png)
 
-### Upload Feature
-![Upload](screenshots/upload.png)
-
-### Cartoon Filter
-![Cartoon](screenshots/cartoon.png)
+### Light Mode
+![Light](screenshots/lightmode.png)
 
 ### Beauty Filter
-![Beauty](screenshots/beauty.png)
+![Beauty](screenshots/beautyfilter.png)
 
-### Mobile Responsive View
-![Mobile](screenshots/mobile.png)
+### Final Result
+![Result](screenshots/result.png)
+
+### Redesigned Layout
+![Redesign](screenshots/redesign.png)
